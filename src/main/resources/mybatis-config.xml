@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties>
+		<!-- <property name="username" value="SFISWEB"/> -->
+		<!-- <property name="password" value="sfisweb#7897"/> -->
+		<property name="username" value="JR_SFISAP" />
+		<property name="password" value="qaz*9ujm" />
+		<property name="lockUserName" value="TP" />
+		<property name="lockPassword" value="ELOCK#TP" />
+		<!-- 最大并发连接数 -->
+		<property name="maxActive" value="200" />
+		<!-- 初始化连接数量 -->
+		<property name="initialSize" value="5" />
+		<!-- 配置获取连接等待超时的时间 /毫秒 -->
+		<property name="maxWait" value="120000" />
+		<!-- 最小空闲连接数 -->
+		<property name="minIdle" value="5" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="90000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="60000" />
+		<!-- 用来检测连接是否有效的sql，要求是一个查询语句。 如果validationQuery为null，testOnBorrow、testOnReturn、 
+			testWhileIdle都不会其作用。 -->
+		<!-- <property name="minEvictableIdleTimeMillis" value="SELECT 'x'" /> -->
+
+		<property name="filters" value="stat,log4j" />
+		<property name="testWhileIdle" value="true" />
+
+		<property name="maxOpenPreparedStatements" value="100" />
+
+		<property name="removeAbandoned" value="true" />
+
+		<property name="removeAbandonedTimeout" value="1800" />
+
+		<property name="logAbandoned" value="true" />
+	</properties>
+
+	<settings>
+		<!-- 全局性地启用或禁用所有在 mapper配置文件中配置的缓存 -->
+		<setting name="cacheEnabled" value="true" />
+
+		<!-- 全局性的启用或禁用延迟加载；当禁用时，所有关联的配置都会立即加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+
+		<!-- 当启用后，一个有延迟加载属性的对象的任何一个延迟属性被加载时，该对象的所有的属性都会被加载。否则，所有属性都是按需加载 -->
+		<setting name="aggressiveLazyLoading" value="false" />
+
+		<!-- 允许或禁止从单一的语句返回多个结果集 -->
+		<setting name="multipleResultSetsEnabled" value="false" />
+
+		<!-- 使用列的标签而不是列的名称。在这方面，不同的驱动程序可能有不同的实现。参考驱动程序的文档或者进行测试来确定您所使用的驱动程的行为 -->
+		<setting name="useColumnLabel" value="false" />
+
+		<!-- 允许JDBC自动生成主键。需要驱动程序兼容。如果设置为true则会强行自动生成主键，然而有些则不会自动生成主键（驱动程序不兼容），但依旧会工作（如Derby） -->
+		<setting name="useGeneratedKeys" value="false" />
+
+		<!-- 指定MyBatis是否以及如何自动将列映射到字段/属性。PARTIAL:只是自动映射简单、非嵌套的结果集。FULL:将会自动映射任何复杂的（嵌套或非嵌套）的结果集 -->
+		<setting name="autoMappingBehavior" value="FULL" />
+
+		<!-- 配置默认的执行器（executor）。SIMPLE：简单的执行器。REUSE：重用preparedstatements的执行器。BATCH：重用statements并且进行批量更新的执行器 -->
+		<setting name="defaultExecutorType" value="SIMPLE" />
+
+		<!-- 设置查询数据库超时时间 -->
+		<setting name="defaultStatementTimeout" value="2500" />
+		<setting name="callSettersOnNulls" value="true" />
+		<!-- <setting name="returnInstanceForEmptyRow" value="true"></setting> -->
+
+		<!-- 控制台打印sql (默认注释掉) -->
+		<!-- <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+	</settings>
+
+	<!-- 为已有的类设置别名,在其他的配置文件里可以使用别名访问到该类 -->
+	<typeAliases>
+		<typeAlias alias="DruidDataSource"
+				   type="entity.DefineDataSourceFactory" />
+		<typeAlias alias="C3P0DataSource"
+				   type="entity.C3P0DataSourceFactory" />
+		<typeAlias alias="User" type="entity.User" />
+		<typeAlias alias="Page" type="entity.menu.Page" />
+		<typeAlias alias="Pagination" type="entity.Pagination" />
+		<typeAlias alias="Mo_d" type="entity.query.isn_query.Mo_d" />
+		<typeAlias alias="linkedHashMap"
+				   type="java.util.LinkedHashMap" />
+	</typeAliases>
+
+	<!-- 配置分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+			<property name="dialect" value="oracle" />
+		</plugin>
+	</plugins>
+
+	<environments default="SFISWEB">
+	<!--<environment id="SFISWEB">
+        <transactionManager type="JDBC" />
+        <dataSource type="DruidDataSource">
+            <property name="driverClassName"
+                      value="oracle.jdbc.driver.OracleDriver" />
+            <property name="url"
+                      value="jdbc:oracle:thin:@172.28.149.65:1521/SHSFISBASE" />
+            <property name="username" value="${username}" />
+            <property name="password" value="${password}" />
+            <property name="maxActive" value="${maxActive}" />
+            <property name="initialSize" value="${initialSize}" />
+            <property name="maxWait" value="${maxWait}" />
+            <property name="minIdle" value="${minIdle}" />
+            <property name="timeBetweenEvictionRunsMillis"
+                      value="${timeBetweenEvictionRunsMillis}" />
+            <property name="filters" value="${filters}" />
+            <property name="testWhileIdle" value="${testWhileIdle}" />
+
+            <property name="maxOpenPreparedStatements"
+                      value="${maxOpenPreparedStatements}" />
+
+            <property name="removeAbandoned" value="${removeAbandoned}" />
+
+            <property name="removeAbandonedTimeout"
+                      value="${removeAbandonedTimeout}" />
+
+            <property name="logAbandoned" value="${logAbandoned}" />
+        </dataSource>
+    </environment>-->
+		<environment id="SFISWEB">
+			<transactionManager type="JDBC" />
+			<dataSource type="DruidDataSource">
+				<property name="driverClassName"
+						  value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+						  value="jdbc:oracle:thin:@172.17.32.25:1521/PISFBASE" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				<property name="maxActive" value="${maxActive}" />
+				<property name="initialSize" value="${initialSize}" />
+				<property name="maxWait" value="${maxWait}" />
+				<property name="minIdle" value="${minIdle}" />
+				<property name="timeBetweenEvictionRunsMillis"
+						  value="${timeBetweenEvictionRunsMillis}" />
+				<property name="filters" value="${filters}" />
+				<property name="testWhileIdle" value="${testWhileIdle}" />
+
+				<property name="maxOpenPreparedStatements"
+						  value="${maxOpenPreparedStatements}" />
+
+				<property name="removeAbandoned" value="${removeAbandoned}" />
+
+				<property name="removeAbandonedTimeout"
+						  value="${removeAbandonedTimeout}" />
+
+				<property name="logAbandoned" value="${logAbandoned}" />
+			</dataSource>
+		</environment>
+		<environment id="KSSFISBASE">
+			<transactionManager type="JDBC" />
+			<dataSource type="DruidDataSource">
+				<property name="driverClassName"
+						  value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+						  value="jdbc:oracle:thin:@172.28.192.173:1521/KSSFISBASE" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				<property name="maxActive" value="${maxActive}" />
+				<property name="initialSize" value="${initialSize}" />
+				<property name="maxWait" value="${maxWait}" />
+				<property name="minIdle" value="${minIdle}" />
+				<property name="timeBetweenEvictionRunsMillis"
+						  value="${timeBetweenEvictionRunsMillis}" />
+				<property name="filters" value="${filters}" />
+				<property name="testWhileIdle" value="${testWhileIdle}" />
+
+				<property name="maxOpenPreparedStatements"
+						  value="${maxOpenPreparedStatements}" />
+
+				<property name="removeAbandoned" value="${removeAbandoned}" />
+
+				<property name="removeAbandonedTimeout"
+						  value="${removeAbandonedTimeout}" />
+
+				<property name="logAbandoned" value="${logAbandoned}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 这里映射具体的mapper配置文件 -->
+	<mappers>
+		<mapper resource="mapper/helloWorldMapper.xml" />
+	</mappers>
+</configuration>

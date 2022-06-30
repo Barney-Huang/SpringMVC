@@ -1,0 +1,677 @@
+@CHARSET "utf-8";
+
+html {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+body {
+	font-family: "Consolas";
+	line-height: 20px;
+	padding: 0;
+	min-width: 860px;
+}
+@font-face {
+	font-family: selfFont;
+	src: url('../Font/Myriad_Set_Semibold_Win.ttf');
+}
+/**************************************** LOGIN ****************************************/
+.login_panel>span {
+	width: 120px;
+}
+#window_login {
+	top: 0 !important;
+	width: 260px;
+	height: 208px;
+	padding: 5px 60px 5px 60px;
+}
+.login-item {
+	margin: 12px auto;
+}
+.login-item input22 {
+	width: 100%;
+	height: 30px;
+	padding-left: 10px;
+}
+#window_forgetPassword {
+	top: 0 !important;
+	width: 260px;
+	height: 240px;
+	padding: 5px 60px 5px 60px;
+}
+#window_modifyPassword {
+	top: 0px !important;
+	width: 260px;
+	height: 240px;
+	padding: 5px 60px 5px 60px;
+}
+/**************************************** HEADER ****************************************/
+/* 第一个设定为 position:relative;, 第二个设定为 position:fixed;, 
+        才能解决在 IE 中下拉主菜单显示在前面 */
+#header {
+	height: 90px;
+	position: relative;
+}
+#header>div {
+	width: 100%;
+	min-width: 860px;
+	position: fixed;
+}
+#head-upper {
+	height:48px;
+	vertical-align:middle;
+	background:url(images/title_bg.png) repeat;
+}
+#head-upper img {
+	margin-top: 1px;
+	margin-left: 10px;
+	border-style: none;
+}
+#head_left {
+	line-height: 18px;
+	float: right;
+	margin-right: 15px;
+	margin-bottom: 0;
+}
+#head_left span{
+	color:#3A66D6;
+	right:55px;
+	position:absolute;
+}
+#head_left>li:first-child {
+	float: right;
+}
+#head_nav {
+	float: right;
+	padding: 0;
+	list-style: none;
+	color: #1874CD;
+}
+
+#head_nav>ul>li {
+	display: inline-block;
+}
+
+/**************************************** 未来要删除的 ****************************************/
+.wrap {
+	overflow: hidden;
+	position: relative;
+	/* z-index: 111111; */
+}
+#head_nav2 {
+	float: right;
+	padding: 0;
+	list-style: none;
+	color: #1874CD;
+}
+#head_nav2>ul>li {
+	display: inline-block;
+}
+.info_panel {
+	font-size: 14px;
+	margin: 10px auto auto 10px;
+}
+
+.info_panel span {
+	text-align: right;
+	float: left;
+}
+
+.info_panel label {
+	margin-left: 10px;
+}
+/**************************************** 删除结束 ****************************************/
+
+/******************************** MAIN MENU ****************************************/
+#head-lower {
+	min-height: 40px;
+	position: relative;
+	background: url(images/headerbottom.gif) repeat-x;
+	/* z-index: 1111112; */
+}
+.nav-menu ul li:hover {
+	background: #0099FF;
+}
+/* 主菜單列寬設置 */
+.nav-menu>ul>li {
+	width: 13%;
+	text-align: center;
+}
+/* 所有的菜單ul */
+.nav-menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/* 所有的菜單列表 */
+.nav-menu ul li {
+	float: left;
+	position: relative;
+}
+/* 所有菜單的字體顯示設置 */
+.nav-menu ul li a {
+	color: white;
+	font-size: 12px;
+	line-height: 39px;
+	text-decoration: none;
+}
+.nav-menu>ul>li>a {
+	color: blue;
+	font-size: 16px;
+}
+/*三級菜單向左對齊*/
+.nav-menu ul ul ul li a {
+	padding-left: 2px;
+	display: block;
+	/* border: 1px solid white; */
+	width: 100%;
+}
+.nav-menu ul ul ul li {
+	text-align: center;
+	width: 33%;
+	white-space:nowrap;
+	float: left;
+	/* 让li不换行 */
+	display:inline-block;
+	background-color: #63B8FF;
+}
+/* 二級菜單的ul */
+.nav-menu ul ul {
+	position: absolute;
+	display: none;
+	top: 100%;
+	width: 100%;
+	background-color: #63B8FF;
+}
+/* 三级菜单的ul */
+.nav-menu ul ul ul{
+	position: absolute;
+	display: none;
+	top: 100%;
+	width: 300%;  
+	/* 设置背景颜色为无色透明  */
+	background-color: transparent;
+}
+
+/*调节每个三级菜单最大长度，超出部分将被隐藏，达到下滑弹出菜单的效果*/
+/* .thirdMenu {
+	max-height: 400px; 纵向显示菜单个数
+	overflow: hidden;
+} */
+/*三級菜單顯示的相對位置：左右*/
+.nav-menu ul ul ul {
+	top: 0;
+	left: 100%;
+}
+/* 二、三級菜單 */
+.nav-menu ul ul li {
+	width: 100%;
+	border-top: 1px solid white;
+}
+/* 三級菜單 */
+.nav-menu ul ul li {
+	border-left: 1px solid white;
+}
+#menu_home {
+	width: 70px !important;
+}
+#menu_home:hover {
+	background: transparent !important;
+	text-decoration: underline;
+	height: 40px;
+}
+#menu_home img
+{
+	margin-top:7px;
+	border-style:none;
+}
+.forbid {
+	background: #AAAAAA !important;
+}
+.nav-menu>ul>li:hover>a {
+	color: white;
+}
+/********************************* FOOTER *****************************************/
+#footer {
+	height: 30px;
+	background: #1874CD;
+}
+#footer table{
+	width:100%;
+	color:white;
+}
+#foot-1{
+	width:30%;
+	color:white;
+	padding-left:15px;
+}
+#foot-1 span{
+	color: white;
+}
+#foot-2{
+	width:40%;
+	color:white;
+	text-align: center; 
+}
+#foot-3{
+	width:30%
+}
+#foot-3 span{
+	padding-right:15px;
+	float:right;
+	color:white;
+}
+/**************************************** CENTER ****************************************/
+#center {
+	color: #ffffff;
+	font-size: 12px;
+	font-family: 微软雅黑, 宋体, 黑体, Hei, Verdana, Arial, sans-serif;
+	padding: 0px;
+	line-height: 1.8em;
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+    background-size:cover;
+	background-image: url(icons/water.jpg);
+	width:100%;
+	heigh:100%;
+	z-index: 1;
+}
+#center-bg {
+	width: 100%;
+	height: 250px;
+	/* background: url(images/abbg.png); */
+	z-index: 20;
+}
+#left-item {
+	position: absolute;
+	width: 500px;
+	height: 260px;
+	margin: 100px auto auto 8%;
+	/* display: block; */
+	z-index: 2;
+	float: left;
+	background:white;
+	 /* border:solid black 1px;  */
+	border-radius: 10px 10px 10px 10px; 
+	/* 背景透明度 */
+	opacity:0.8;
+	box-shadow: 15px 15px 10px black;
+	/* rgba(102,0,51,0.9) */
+}
+#left-item li {
+	margin-bottom: 1px;
+}
+#left-item li label{
+	color:black;
+}
+#item-right-child {
+	position: absolute;
+	width: 330px;
+	height: 200px;
+	border-left:solid black 1px;
+	margin-left:160px;
+	margin-top: 30px;
+	float: left;
+}
+#item-left-child {
+	
+	width: 150px;
+	height: 100px;
+	margin-top: 60px;
+	position: absolute;
+	float: left;
+	text-align:center;
+	z-index: 2;
+/* 	border:solid black 1px; */
+	
+}
+
+#left-item_project{
+	
+	width:100px;
+	height:100px;
+	position: relative;
+	/* border: solid black 1px; */
+	margin-left:-80px;
+	margin-top: 20%;
+	border-radius:50%;
+	background:white;
+	z-index: 2;
+	
+}
+
+
+#right-item {
+	width: 250px;
+	height: 260px;
+	margin-top: 0px;
+	float: right;
+}
+#right-item li {
+	list-style-type: disc;
+}
+#right-item li a {
+	color: #ffffff;
+}
+#right-item li a:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+#wave_bg {
+	width: 100%;
+	height: 76px;
+	top: -85px;
+	overflow: hidden;
+	position: relative;
+}
+/*
+.wave {
+	width: 100%;
+	height: 40px;
+	margin-top: -40px;
+	background: url(images/wave.png);
+}
+.wave2 {
+	width: 110%;
+	height: 40px;
+	margin: -40px auto auto -150px;
+	background: url(images/wave.png);
+}
+*/
+#banner_bolang_bg_1 {
+	width: 997px;
+	height: 85px;
+	background: url(images/wave1.png) repeat-x;
+	_background-image: url("http://img.nydus.co/images/html5/wave2_ie.png");
+	_filter: alpha(opacity = 80);
+	top: 0;
+	left: -236px;
+	width: 4000%;
+	/* top: 30px; */
+	/*   z-index: 999;   */
+	position: absolute;
+}
+#banner_bolang_bg_2 {
+	width: 1009px;
+	height: 100px;
+	background: url(images/wave2.png) repeat-x;
+	_filter: alpha(opacity = 80);
+	top: 0;
+	left: 0;
+	width: 4000%;
+	/*  z-index: 998;  */
+	position: absolute;
+}
+#center-item {
+	position: absolute;
+	width: 535px;
+	height: 490px;
+	margin: -150px auto auto 55%; 
+	color:white;
+	/* border: white solid 1px; */
+	background: #003366;
+	z-index: 2;
+	background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+	 -webkit-filter: blur(9px);
+    -moz-filter: blur(9px);
+    -o-filter: blur(9px);
+    -ms-filter: blur(9px);
+    filter:blur(9px); 
+    opacity:0.7;
+    border-radius: 10px 10px 10px 10px; 
+
+}
+
+#center-item_one{
+	position: absolute;
+	width: 500px;
+	height: 80px;
+	background : #003366;
+	color:white;
+	margin-left: 56%;
+	margin-top: -130px;
+	/* text-align:center; */
+	z-index: 2;
+	opacity:0.7;
+	line-height: 1.7em;
+	
+}
+
+#center-item_two{
+	position: absolute;
+	width: 500px;
+	height: 80px;
+	background : #003366;
+	color:white;
+	margin-top:-10px;
+	margin-left: 56%;
+	z-index: 2;
+	opacity:0.7;
+	line-height: 1.7em;
+	
+}
+
+#center-item_three{
+	position: absolute;
+	width: 500px;
+	height: 80px;
+	background : #003366;
+	color:white;
+	margin-left: 56%;
+	margin-top:110px;
+	z-index: 2;
+	opacity:0.7;
+	line-height: 1.7em;
+	
+}
+
+#center-item_three a{
+	color: white;
+	font-style:italic;
+	font-weight:bold;
+}
+
+#center-item_four{
+	
+	position: absolute;
+	width: 500px;
+	height: 80px;
+	background : #003366;
+	color:white;
+	margin-top:230px;
+	margin-left: 56%;
+	z-index: 2;
+	opacity:0.7;
+	line-height: 1.7em;
+}
+
+#center-item_four a{
+	color: white;
+	font-style:italic;
+	font-weight:bold;
+}
+
+.center-item-h4{
+	font-weight:bold;
+	font-size:18px;
+}
+
+#center-item table {
+	width: 100%;
+	height: 100%;
+}
+#tips_table .timg {
+	width: 70px;
+	padding: 0;
+}
+#tips_table td {
+	width: 340px;
+	/* color: #666666; */
+	font-size: 13px;
+	line-height: 16px;
+}
+#tips_table h4, p {
+	margin: 0;
+	padding: 0;
+}
+#tips_table h4 {
+	/* color: #666666; */
+}
+#tips_table p {
+	/* color: #999999; */
+	display: block;
+}
+#onlineUsers {
+	width: 100%;
+	color: blue;
+	bottom: 30px;
+	text-align: center;
+	font-size: 12px;
+	font-family: Verdana, Arial, sans-serif;
+	position: absolute;
+}
+
+/******************************* ADMIN_PERMISSION ***************************************/
+#form_panel {
+	width: 100%;
+	overflow: visible;
+}
+
+.form_input {
+	float: left;
+	margin: 10px 20px 0 6px;
+	min-width: 200px;
+}
+
+.form_input select {
+	max-width: 140px;
+	width: 130px;
+	min-width: 110px;
+}
+
+
+/****************************** Admin_Page  *******************************/
+.treebox_menu {
+	width: 100%;
+	height: auto !important;
+	background-color: white;
+	color: black;
+}
+
+.treebox_menu dt {
+	padding-left: 40px;
+	padding-right: 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	font-size: 14px;
+	position: relative;
+	line-height: 48px;
+	cursor: pointer;
+}
+
+.treebox_menu dd, .list_sub_menu li {
+	background-color: #E6EEF8;
+	border-top: 1px solid white;
+}
+
+.treebox_menu dd a, .list_sub_menu li a {
+	line-height: 30px;
+	color: black;
+}
+
+.treebox_menu dt img {
+	position: absolute;
+	right: 10px;
+	top: 20px;
+}
+
+.tree_menu dt {
+	background-image: url(icons/source.png)
+}
+
+dl, dt, dd {
+	display: block;
+	margin: 0;
+	overFlow: hidden;
+}
+
+.list_sub_menu {
+	padding: 0;
+}
+
+.list_sub_menu li a {
+	line-height: 40px;
+}
+
+/******************* ALL **************************/
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.addTable td {
+	min-width: 250px;
+	width: 270px;
+	padding: 4px 3px;
+}
+
+.required {
+	color: red;
+}
+
+@media only screen and (max-width : 1260px) {
+	.addTable td {
+		padding: 4px 2px;
+		width: 210px;
+		min-width: 250px;
+	}
+}
+
+@media only screen and (max-width : 1024px) {
+	.nav-menu ul li a {
+		font-size: 14px;
+	}
+	.nav-menu>ul>li>ul {
+		width: 120%;
+	}
+}
+
+a:HOVER {
+	cursor: pointer;
+}
+
+.inDiv {
+	display: inline-block;
+	margin: 10px 30px;
+}
+
+.showInfo {
+	margin-left: 30px;
+	color: red;
+}
+
+.mask {
+	background: #000;
+  	filter: alpha(opacity=50); /* IE的透明度 */
+  	opacity: 0.5; /* 透明度 */
+  	display: none;
+  	position: absolute;
+  	top: 0px;
+  	left: 0px;
+  	width: 100%;
+  	height: 100%;
+  	z-index: 100; /* 此处的图层要大于页面 */
+  	display:none;
+  	_background-color:#a0a0a0; /* 解决IE6的不透明问题 */
+}

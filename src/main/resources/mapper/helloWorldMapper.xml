@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.helloWorldMapper">
+
+    <select id="selectAttrIDByMolelID" resultType="Map" parameterType="String">
+        SELECT DISTINCT ATTRID textField,ATTRID valueField  FROM MODEL_D WHERE MODELID=#{modelID} ORDER BY ATTRID
+    </select>
+
+    <select id="selectAttrNMByMolelID" resultType="Map" parameterType="String">
+        SELECT DISTINCT ATTRNM textField,ATTRNM valueField FROM MODEL_D WHERE MODELID=#{modelID} ORDER BY ATTRNM
+    </select>
+
+    <select id="selectCLSIDC" resultType="map">
+        SELECT CLSIDC textField,CLSIDC valueField FROM CLS WHERE CLSA='MODEL_D' AND CLSB='ATTRID'
+    </select>
+
+    <select id="selectModelInfo" parameterType="Map" resultType="Map">
+        SELECT MODELID,ATTRID,ATTRITEM,ATTRNM,ATTRINFO,OP,LASTUPD,ATTRFLAG FROM MODEL_D WHERE 1=1
+        <if test="modelID!='ALL'">
+            AND MODELID = #{modelID}
+        </if>
+        <if test="attrNM!='ALL'">
+            AND ATTRNM = #{attrNM}
+        </if>
+        <if test="attrID!='ALL'">
+            AND ATTRID = #{attrID}
+        </if>
+        ORDER BY MODELID
+    </select>
+
+    <!-- 实现页面模糊查询功能的sql， 根据'method'变量判断是查询ATTRID,ATTRNM,MODELID， keyWord是USER在页面上输入的查询关键字 -->
+    <select id="findInfoByKeyWord" parameterType="Map" resultType="Map">
+        <if test="method=='modelID'">
+            SELECT DISTINCT MODELID textField,MODELID valueField FROM MODEL_D
+            WHERE (UPPER(MODELID) LIKE #{keyWord}||'%'  ESCAPE '\' or LOWER(MODELID) LIKE #{keyWord}||'%' ESCAPE '\')
+            <if test="dbid=='SHPADBHS'">
+                AND MODELID != 'CSD_Form'
+            </if>
+            ORDER BY MODELID
+        </if>
+
+        <if test="method=='attrNM'">
+            SELECT DISTINCT ATTRNM textField,ATTRNM valueField FROM MODEL_D
+            WHERE UPPER(ATTRNM) LIKE #{keyWord}||'%'  ESCAPE '\' OR LOWER(ATTRNM) LIKE #{keyWord}||'%' ESCAPE '\'
+            ORDER BY ATTRNM
+        </if>
+
+        <if test="method=='attrID'">
+            SELECT DISTINCT ATTRID TEXTFIELD,ATTRID valueField FROM MODEL_D
+            WHERE UPPER(ATTRID) LIKE #{keyWord}||'%'  ESCAPE '\' OR LOWER(ATTRID) LIKE #{keyWord}||'%' ESCAPE '\'
+            ORDER BY ATTRID
+        </if>
+    </select>
+
+    <insert id="insertModelInfo" parameterType="entity.Model_D">
+        INSERT INTO MODEL_D (MODELID,ATTRID,ATTRITEM,ATTRNM,ATTRINFO,OP,LASTUPD,ATTRFLAG)
+        VALUES(#{MODELID},#{ATTRID},#{ATTRITEM},#{ATTRNM},#{ATTRINFO},#{OP},SYSDATE,#{ATTRFLAG})
+    </insert>
+
+    <insert id="batchInsertModel" parameterType="list">
+        INSERT INTO MODEL_D (MODELID,ATTRID,ATTRITEM,ATTRNM,ATTRINFO,OP,LASTUPD,ATTRFLAG)
+        <foreach collection="list" index="index" item="item" separator="UNION ALL">
+            SELECT #{item.MODELID},#{item.ATTRID},#{item.ATTRITEM},#{item.ATTRNM},#{item.ATTRINFO},#{item.OP},SYSDATE,#{item.ATTRFLAG} FROM DUAL
+        </foreach>
+    </insert>
+
+    <select id="isExistInModel_D" parameterType="Map" resultType="int">
+        SELECT COUNT(MODELID) QTY FROM MODEL_D WHERE MODELID=#{modelID} AND ATTRID=#{attrID} AND ATTRITEM=#{attrItem}
+    </select>
+
+    <delete id="deleteModelInfo" parameterType="Map">
+        DELETE FROM MODEL_D WHERE ATTRID=#{attrID} AND ATTRITEM=#{attrItem} AND MODELID=#{modelID}
+    </delete>
+
+    <update id="updateModelInfo" parameterType="entity.Model_D">
+        UPDATE MODEL_D
+        SET ATTRINFO=#{ATTRINFO}, ATTRFLAG=#{ATTRFLAG}, ATTRNM=#{ATTRNM},OP=#{OP},LASTUPD=SYSDATE
+        WHERE ATTRID=#{ATTRID} AND ATTRITEM=#{ATTRITEM} AND MODELID=#{MODELID}
+    </update>
+
+    <update id="batchUpdateModel" parameterType="list">
+        <foreach collection="list" index="index" item="item" open="BEGIN" close=";END;" separator=";">
+            UPDATE MODEL_D
+            SET ATTRINFO=#{ATTRINFO}, ATTRFLAG=#{ATTRFLAG}, ATTRNM=#{ATTRNM},OP=#{OP},LASTUPD=SYSDATE
+            WHERE ATTRID=#{ATTRID} AND ATTRITEM=#{ATTRITEM} AND MODELID=#{MODELID}
+        </foreach>
+    </update>
+
+    <select id="checkSync" parameterType="Map" resultType="boolean">
+        SELECT CASE
+                   WHEN EXISTS(SELECT ATTRID, ATTRINFO FROM KEY_MAP
+                               WHERE KEYTYPE='WEB.PSH-SKII.EXE' AND KEYID=#{table} AND ATTRID=#{key} AND ATTRINFO=#{values})
+                       THEN 'true' ELSE 'false' END RET
+        FROM DUAL
+    </select>
+
+    <!-- 查询是csd还是fatp -->
+    <select id="selectAPID" parameterType="String" resultType="String">
+        select funcid from opap where apid = 'SFIS_WEB' and opid = #{opid}
+    </select>
+
+    <select id="selectOP" parameterType="entity.Model_D" resultType="String">
+        select op from MODEL_D WHERE ATTRID=#{ATTRID} AND ATTRITEM=#{ATTRITEM} AND MODELID=#{MODELID}
+    </select>
+
+</mapper>
